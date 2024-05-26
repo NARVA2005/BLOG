@@ -1,0 +1,23 @@
+erDiagram
+    USER {
+        id INT PK
+        username VARCHAR
+        email VARCHAR
+        password VARCHAR
+    }
+
+    BLOG_ENTRY {
+        id INT PK
+        title VARCHAR
+        content TEXT
+        date_created DATETIME
+        user_id INT FK >- USER.id
+    }
+
+    COMMENT {
+        id INT PK
+        content TEXT
+        date_created DATETIME
+        user_id INT FK >- USER.id
+        blog_entry_id INT FK >- BLOG_ENTRY.id
+    }

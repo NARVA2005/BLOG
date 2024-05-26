@@ -1,0 +1,18 @@
+@startuml
+left to right direction
+
+actor "Dueño del Blog" as d
+
+rectangle "Gestión de Entradas del Blog" {
+    usecase "Crear entrada de blog" as UC3
+    usecase "Editar entrada de blog" as UC4
+    usecase "Eliminar entrada de blog" as UC5
+    usecase "Ver entradas de blog" as UC6
+}
+
+d --> UC3
+d --> UC4
+d --> UC5
+d --> UC6
+
+@enduml

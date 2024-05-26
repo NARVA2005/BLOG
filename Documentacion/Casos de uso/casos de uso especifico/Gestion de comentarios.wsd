@@ -1,0 +1,17 @@
+    @startuml
+left to right direction
+
+actor Usuario as u
+actor "Dueño del Blog" as d
+
+rectangle "Gestión de Comentarios" {
+    usecase "Comentar entrada de blog" as UC7
+    usecase "Editar comentario" as UC8
+    usecase "Eliminar comentario" as UC9
+}
+
+u --> UC7
+d --> UC8
+d --> UC9
+
+@enduml

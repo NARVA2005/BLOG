@@ -1,0 +1,29 @@
+sequenceDiagram
+    participant Usuario
+    participant "Aplicación de Blog" as App
+    participant BaseDeDatos as BD
+    participant ServidorSMTP as SMTP
+
+    Note over Usuario, App: Usuario ingresa credenciales
+    Usuario ->> App: Ingresar credenciales
+    App ->> BD: Verificar credenciales
+    BD -->> App: Credenciales válidas
+    alt Credenciales válidas
+        App ->> BD: Cargar información del usuario
+        BD -->> App: Información del usuario
+        alt Autenticación de dos pasos activada
+            App ->> Usuario: Solicitar código de verificación
+            Usuario ->> App: Ingresar código de verificación
+            App ->> BD: Verificar código de verificación
+            BD -->> App: Código de verificación válido
+        else
+            App ->> BD: Generar token de sesión
+            BD -->> App: Token de sesión generado
+        end
+        App ->> Usuario: Sesión iniciada correctamente
+    else Credenciales inválidas
+        App ->> Usuario: Error: Credenciales inválidas
+    end
+
+    App ->> SMTP: Enviar notificación de inicio de sesión
+    SMTP -->> App: Confirmación de envío

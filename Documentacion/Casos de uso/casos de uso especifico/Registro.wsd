@@ -1,0 +1,14 @@
+@startuml
+left to right direction
+
+actor Usuario as u
+
+rectangle "Registro y Autenticación" {
+    usecase "Registrarse" as UC1
+    usecase "Iniciar sesión" as UC2
+}
+
+u --> UC1
+u --> UC2
+
+@enduml

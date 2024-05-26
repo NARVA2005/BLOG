@@ -1,0 +1,31 @@
+%%{init: {"theme": "base", "themeVariables": { "primaryColor": "#008000"}}}%%
+graph TD
+    subgraph "Servidor de Aplicación"
+        A[Backend]
+    end
+    
+    subgraph "Base de Datos"
+        B[Base de Datos]
+    end
+    
+    subgraph "Servidor Web"
+        C(Servidor Web)
+    end
+    
+    subgraph "Cliente"
+        D[Interfaz de Usuario]
+    end
+    
+    subgraph "Servicio de Autenticación"
+        E[Servicio de Autenticación]
+    end
+    
+    subgraph "Servicio de Almacenamiento de Archivos"
+        F[Servicio de Almacenamiento de Archivos]
+    end
+    
+    A --> B
+    A --> C
+    C --> D
+    D --> E
+    D --> F

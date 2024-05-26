@@ -1,0 +1,26 @@
+graph TD
+    subgraph "Cliente"
+        A[Interfaz de Usuario]
+        B[Controlador de Cliente]
+    end
+
+    subgraph "Servidor"
+        C[API REST]
+        D[Controlador de Servidor]
+    end
+
+    subgraph "Base de Datos"
+        E[Base de Datos]
+    end
+
+    subgraph "Servicios Externos"
+        F[Servicio de Autenticación]
+        G[Servicio de Almacenamiento de Archivos]
+    end
+
+    A -.-> B
+    B --> C
+    C --> D
+    D --> E
+    D --> F
+    D --> G

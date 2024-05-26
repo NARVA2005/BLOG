@@ -1,0 +1,28 @@
+@startuml
+left to right direction
+
+actor Usuario as u
+actor "Dueño del Blog" as d
+
+rectangle "Aplicación de Blog" {
+    usecase "Registrarse" as UC1
+    usecase "Iniciar sesión" as UC2
+    usecase "Crear entrada de blog" as UC3
+    usecase "Editar entrada de blog" as UC4
+    usecase "Eliminar entrada de blog" as UC5
+    usecase "Ver entradas de blog" as UC6
+    usecase "Comentar entrada de blog" as UC7
+}
+
+u --> UC1
+u --> UC2
+u --> UC6
+u --> UC7
+
+d --> UC2
+d --> UC3
+d --> UC4
+d --> UC5
+d --> UC6
+
+@enduml

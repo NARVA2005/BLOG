@@ -1,0 +1,14 @@
+graph TD
+    A(Inicio) --> B(Verificar sesión de usuario)
+    B -->|Sesión válida| C(Crear formulario de entrada)
+    C --> D(Editar contenido)
+    D --> E(Agregar etiquetas y categorías)
+    E --> F(Adjuntar imágenes o archivos)
+    F --> G(Revisar entrada)
+    G --> H{Confirmar}
+    H -->|Sí| I(Guardar entrada en la base de datos)
+    I --> J(Enviar notificación a seguidores)
+    J --> K(Fin)
+    H -->|No| C
+    B -->|Sesión inválida| L(Redirigir a inicio de sesión)
+    L --> K

@@ -1,0 +1,14 @@
+@startuml
+left to right direction
+
+actor Administrador as admin
+
+rectangle "Gestión de Usuarios" {
+    usecase "Editar usuario" as UC10
+    usecase "Eliminar usuario" as UC11
+}
+
+admin --> UC10
+admin --> UC11
+
+@enduml
