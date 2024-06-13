@@ -7,7 +7,8 @@ import comentarioruta from './routes/comentarioruta.js';
 import entradasruta from "./routes/entradasruta.js";
 
 const app = express();
-const port = 3000;
+require('dotenv').config()
+
 app.use(cors());
 app.use(express.json());
 
@@ -15,6 +16,7 @@ app.use(express.json());
 app.use("/usuarios", usuarioruta);
 app.use("/comentarios", comentarioruta);
 app.use("/entradas", entradasruta);
+const port =process.env.PORT || 3000;
 app.listen(port, () => {
   console.log(`Aplicación escuchando en el puerto ${port}`);
 });
