@@ -1,13 +1,13 @@
 import express from 'express';
 import cors from 'cors';
-import { sequelize } from './models/baseDatos.js';
-//Rutas
-import usuarioruta from './routes/usuarioruta.js';
+import { sequelize } from './models/baseDatos.js'; 
+//Rutas  
+import usuarioruta from './routes/usuarioruta.js'; 
 import comentarioruta from './routes/comentarioruta.js';
 import entradasruta from "./routes/entradasruta.js";
-
+import dotenv from 'dotenv';
 const app = express();
-require('dotenv').config()
+dotenv.config();
 
 app.use(cors());
 app.use(express.json());
