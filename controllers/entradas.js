@@ -48,7 +48,7 @@ export const crearPublicacion = async (req, res) => {
               delete req.body.imagen;
             }
 
-            const { Titulos, Contenido, fechaPublicacion } = req.body;
+            const { Titulos, Contenido, fechaPublicacion} = req.body;
             console.log(Titulos, Contenido, fechaPublicacion); 
 
             if (!Titulos || !Contenido || !fechaPublicacion) {
@@ -66,6 +66,7 @@ export const crearPublicacion = async (req, res) => {
                 Contenido,
                 fechaPublicacion,
                 imagen: req.body.imagen,
+    
             });
 
             // Devolver la publicación

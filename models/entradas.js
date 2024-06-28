@@ -29,8 +29,9 @@ export const Entradas = sequelize.define(
                     allowNull: false,
                 },
                 estado:{
-                    type:DataTypes.STRING(300),
-                    allowNull:false,
+                    type: DataTypes.ENUM('activo', 'inactivo'),
+                    defaultValue: 'activo', // Aquí se establece 'activo' como valor por defecto
+                    allowNull: false,
                 }
              
     },
