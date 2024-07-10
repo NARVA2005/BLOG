@@ -1,4 +1,32 @@
-import { Usuarios } from "../models/usuarios.js";
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: usuarios.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: usuarios.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import { Usuarios } from "../models/usuarios.js";
 import bcrypt from "bcrypt";
 
 
@@ -15,7 +43,7 @@ import bcrypt from "bcrypt";
  * @param {string} req.body.password - Contraseña del usuario.
  * @param {boolean} req.body.estado - Estado del usuario.
  * @param {Object} res - Objeto de respuesta HTTP.
- * @returns {Promise<void>} - Retorna una respuesta HTTP con el estado de la creación del usuario.
+ * @returns {Promise&lt;void>} - Retorna una respuesta HTTP con el estado de la creación del usuario.
  * 
  * @throws {Error} Si ocurre un error durante la creación del usuario.
  */
@@ -61,7 +89,7 @@ export const crearUsuario = async (req, res) => {
  * @param {string} req.body.email - Nuevo correo electrónico del usuario.
  * @param {string} req.body.password - Nueva contraseña del usuario.
  * @param {Object} res - Objeto de respuesta HTTP.
- * @returns {Promise<void>} - Retorna una respuesta HTTP con el estado de la edición del usuario.
+ * @returns {Promise&lt;void>} - Retorna una respuesta HTTP con el estado de la edición del usuario.
  * 
  * @throws {Error} Si ocurre un error durante la edición del usuario.
  */
@@ -114,7 +142,7 @@ export const editarUsuario = async (req, res) => {
  * @param {Object} req.body - Cuerpo de la solicitud HTTP.
  * @param {boolean} req.body.estado - Nuevo estado del usuario.
  * @param {Object} res - Objeto de respuesta HTTP.
- * @returns {Promise<void>} - Retorna una respuesta HTTP con el estado de la desactivación del usuario.
+ * @returns {Promise&lt;void>} - Retorna una respuesta HTTP con el estado de la desactivación del usuario.
  * 
  * @throws {Error} Si ocurre un error durante la actualización del estado del usuario.
  */
@@ -156,7 +184,7 @@ res.status(200).json({message:"Usuario desactivado"});
  * @function TraerUsuarios
  * @param {Object} req - Objeto de solicitud HTTP.
  * @param {Object} res - Objeto de respuesta HTTP.
- * @returns {Promise<void>} - Retorna una respuesta HTTP con todos los usuarios encontrados o un mensaje de error si no hay usuarios.
+ * @returns {Promise&lt;void>} - Retorna una respuesta HTTP con todos los usuarios encontrados o un mensaje de error si no hay usuarios.
  * 
  * @throws {Error} Si ocurre un error al obtener los usuarios de la base de datos.
  */
@@ -185,7 +213,7 @@ export const TraerUsuarios=async(req, res)=>{
  * @param {Object} req.params - Parámetros de la solicitud.
  * @param {string} req.params.idUsuarios - ID del usuario a buscar.
  * @param {Object} res - Objeto de respuesta HTTP.
- * @returns {Promise<void>} - Retorna una respuesta HTTP con el usuario encontrado o un mensaje indicando que no se encontró el usuario.
+ * @returns {Promise&lt;void>} - Retorna una respuesta HTTP con el usuario encontrado o un mensaje indicando que no se encontró el usuario.
  * 
  * @throws {Error} Si ocurre un error al obtener el usuario de la base de datos.
  */
@@ -207,4 +235,26 @@ res.status().json({message: "No se encontro el usuario con ese ID."})
         console.error("Usuario no encontrado correctamente", error);
         res.status(500).json({ error: "Error del servidor" });
     }
-}
+}</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#EliminarComentario">EliminarComentario</a></li><li><a href="global.html#TraerTodasEntradas">TraerTodasEntradas</a></li><li><a href="global.html#TraerTodasID">TraerTodasID</a></li><li><a href="global.html#TraerUsuarioID">TraerUsuarioID</a></li><li><a href="global.html#TraerUsuarios">TraerUsuarios</a></li><li><a href="global.html#crearComentario">crearComentario</a></li><li><a href="global.html#crearPublicacion">crearPublicacion</a></li><li><a href="global.html#crearUsuario">crearUsuario</a></li><li><a href="global.html#desactivarPublicacion">desactivarPublicacion</a></li><li><a href="global.html#desactivarUsuario">desactivarUsuario</a></li><li><a href="global.html#destination">destination</a></li><li><a href="global.html#editarComentario">editarComentario</a></li><li><a href="global.html#editarPublicacion">editarPublicacion</a></li><li><a href="global.html#editarUsuario">editarUsuario</a></li><li><a href="global.html#filename">filename</a></li><li><a href="global.html#storage">storage</a></li><li><a href="global.html#traerTodosComentario">traerTodosComentario</a></li><li><a href="global.html#upload">upload</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.3</a> on Tue Jul 09 2024 07:21:00 GMT-0500 (hora estándar de Colombia)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
