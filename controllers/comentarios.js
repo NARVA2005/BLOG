@@ -1,5 +1,5 @@
 import { Comentarios } from "../models/comentarios.js";
-
+import { Usuarios } from "../models/usuarios.js";
 /**
  * Crea un nuevo comentario en la base de datos.
  * 
@@ -20,28 +20,25 @@ import { Comentarios } from "../models/comentarios.js";
 
 export const crearComentario = async (req, res) => {
     try {
-        const { Usuarios_idUsuarios } = req.params; // Asegúrate de que Usuarios_idUsuarios esté en los parámetros de la URL
-        console.log(Usuarios_idUsuarios); // Para verificar que se obtiene correctamente
+        const { Contenido, fechaComentario, Usuarios_idUsuarios, Entradas_idEntradas } = req.body;
 
-        const { Contenido, fechaComentario, Entradas_idEntradas } = req.body;
-console.log(fechaComentario);
-        if (!Contenido || !fechaComentario || !Entradas_idEntradas || !Usuarios_idUsuarios) {
+      
+    console.log('Datos recibidos:', req.body); // Verifica los datos recibidos
+        if (!Contenido || !fechaComentario || !Usuarios_idUsuarios || !Entradas_idEntradas) {
             return res.status(400).json({ error: "Faltan campos por llenar" });
         }
 
-        // Crear el nuevo comentario en la base de datos
+        // Agregar el comentario en la base de datos
         const nuevoComentario = await Comentarios.create({
-            Contenido,
-            fechaComentario,
-            Usuarios_idUsuarios, // Asegúrate de incluir este campo
+            Contenido: Contenido,
+            fechaComentario: new Date().toISOString().split('T')[0],
+            Usuarios_idUsuarios,
             Entradas_idEntradas
         });
 
-        console.log('Comentario creado:', nuevoComentario);
-
-        return res.status(200).json({ message: "Comentario creado correctamente" });
+        return res.status(200).json({ message: "Comentario agregado correctamente" });
     } catch (error) {
-        console.error("Error al insertar en la base de datos", error.message);
+        console.error("Error al agregar comentario:", error.message);
         return res.status(500).json({ error: "Error interno del servidor" });
     }
 };
@@ -170,3 +167,43 @@ export const traerTodosComentario=async(req, res)=>{
         res.status(500).json({ error: "Error del servidor" });
     }
 } 
+
+
+
+/**
+ * Trae todos los comentarios de la base de datos por id de entrada.
+ * 
+ * @async
+ * @function traerTodosComentarioID
+ * @param {Object} req - Objeto de solicitud HTTP.
+ * @param {Object} res - Objeto de respuesta HTTP.
+ * @returns {Promise<void>} - Retorna una respuesta HTTP con  los comentarios encontrados por entrada o un mensaje de error.
+ * 
+ * @throws {Error} Si ocurre un error al obtener los comentarios de la entrada en la base de datos.
+ */
+
+Comentarios.belongsTo(Usuarios, { foreignKey: 'Usuarios_idUsuarios' });
+
+export const traerTodosComentarioID = async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const traerTodo = await Comentarios.findAll({
+      where: { Entradas_idEntradas: id },
+      include: [{
+        model: Usuarios,
+        attributes: ['nombre'] // Solo traer el nombre del usuario
+      }]
+    });
+
+    if (traerTodo.length > 0) {
+      res.status(200).json(traerTodo);
+    } else {
+      res.status(400).json({ message: "No se encontraron comentarios disponibles" });
+    }
+  } catch (error) {
+    console.error("Error al traer los comentarios", error);
+    res.status(500).json({ error: "Error del servidor" });
+  }
+};
+  

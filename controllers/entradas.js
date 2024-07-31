@@ -108,7 +108,7 @@ export const crearPublicacion = async (req, res) => {
             const nuevaPublicacion = await Entradas.create({
                 Titulos,
                 Contenido,
-                fechaPublicacion,
+                fechaPublicacion:new Date().toISOString().split('T')[0],
                 imagen: req.body.imagen,
     
             });
@@ -263,26 +263,27 @@ export const desactivarPublicacion= async(req, res)=>{
  * @throws {Error} Si ocurre un error al obtener las publicaciones de la base de datos.
  */
 
-export const TraerTodasEntradas=async(req, res)=>{
-try {
- 
-    const TraerTodos=await Entradas.findAll({
-where:{
-    estado:'activo'
-}
-    })
-/* console.log(TraerTodos); */
-
-if(TraerTodos.length>0){
-    res.status(200).json(TraerTodos);
-}else{
-res.status(400).json({message:"No se encontraron comentarios datos"});
-}
-} catch (error) {
-    console.log(error, "Error al traer todas las publicaciones")
-}
-}
-
+export const TraerTodasEntradas = async (req, res) => {
+    try {
+      const TraerTodos = await Entradas.findAll({
+        where: {
+          estado: 'activo'
+        }
+      });
+  
+      console.log('Entradas:', TraerTodos); // Agrega este log
+  
+      if (TraerTodos.length > 0) {
+        res.status(200).json(TraerTodos);
+      } else {
+        res.status(400).json({ message: "No se encontraron datos" });
+      }
+    } catch (error) {
+      console.log(error, "Error al traer todas las publicaciones");
+      res.status(500).json({ error: "Error interno del servidor" });
+    }
+  };
+  
 /**
  * Trae todas las publicaciones con un ID específico.
  * 
@@ -310,7 +311,30 @@ export const TraerPorTitulos = async (req, res) => {
       if (TraerTodosid.length > 0) {
         res.status(200).json(TraerTodosid);
       } else {
-        res.status(200).json({ message: "No hay comentarios con ese Titulo" });
+        res.status(200).json({ message: "No hay Publicaciones con ese Titulo" });
+      }
+  
+    } catch (error) {
+      console.log(error, "Error al traer todas las publicaciones");
+      res.status(500).json({ message: "Error al traer las publicaciones" });
+    }
+  };
+
+
+  export const TraerPorId = async (req, res) => {
+    try {
+      const { id } = req.params;
+ 
+      const TraerTodosid = await Entradas.findAll({
+        where: {
+          idEntradas: id
+        }
+      });
+  
+      if (TraerTodosid.length > 0) {
+        res.status(200).json(TraerTodosid);
+      } else {
+        res.status(200).json({ message: "No hay Publicaciones con ese id" });
       }
   
     } catch (error) {

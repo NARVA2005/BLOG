@@ -22,14 +22,26 @@ import bcrypt from "bcrypt";
 
 export const crearUsuario = async (req, res) => {
     try {
-        const { identificacion, nombre, email, password, estado} = req.body;
+        const { identificacion, nombre, email, password } = req.body;
+
+        if (!identificacion || !nombre || !email || !password) {
+            return res.status(400).json({ error: "Faltan campos por llenar" });
+        }
+
+        // Verificar si el correo electrónico o la identificación ya existen en la base de datos
+        const usuarioExistente = await Usuarios.findOne({ where: { email } });
+        const identificacionExistente = await Usuarios.findOne({ where: { identificacion } });
+
+        if (usuarioExistente) {
+            return res.status(400).json({ error: "El correo electrónico ya está registrado" });
+        }
+
+        if (identificacionExistente) {
+            return res.status(400).json({ error: "La identificación ya está registrada" });
+        }
 
         // Encriptar la contraseña con una sal única
         const hashedPassword = bcrypt.hashSync(password, 10);
-
-        if (!identificacion || !nombre || !email || !password || !estado) {
-            return res.status(400).json({ error: "Faltan campos por llenar" });
-        }
 
         // Crear el nuevo usuario en la base de datos
         const nuevoUsuario = await Usuarios.create({
@@ -37,7 +49,6 @@ export const crearUsuario = async (req, res) => {
             nombre,
             email,
             password: hashedPassword,
-            estado
         });
 
         return res.status(200).json({ message: "Usuario creado correctamente" });
@@ -46,7 +57,6 @@ export const crearUsuario = async (req, res) => {
         return res.status(500).json({ error: "Error interno del servidor" });
     }
 };
-
 
 /**
  * Edita un usuario existente.
@@ -86,7 +96,7 @@ export const editarUsuario = async (req, res) => {
             },
             {
                 where: {
-                    identificacion: identificacion
+                    idUsuarios: identificacion
                 }
             }
         );

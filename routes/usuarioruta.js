@@ -11,4 +11,5 @@ router.put("/editarEstado/:identificacion",desactivarUsuario);
 router.get("/traerTodos",TraerUsuarios);
 router.get("/traerUsuarioId/:idUsuarios",TraerUsuarioID);
 
+
 export default router;
