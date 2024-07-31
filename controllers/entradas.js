@@ -297,24 +297,24 @@ res.status(400).json({message:"No se encontraron comentarios datos"});
  * @throws {Error} Si ocurre un error al obtener las publicaciones de la base de datos.
  */
 
-export const TraerTodasID=async(req, res)=>{
+export const TraerPorTitulos = async (req, res) => {
     try {
-        const{Titulos}=req.params;
-     
-        const TraerTodosid=await Entradas.findAll({
-    where:{
-        Titulos:Titulos
-    }
-        })
-        if(TraerTodosid.length>0){
-            res.status(200).json(TraerTodosid);
-        }else{
-            res.status(200).json({message:"No hay comentarios con ese Titulo"});
+      const { Titulos } = req.params;
+      console.log('Titulos:', Titulos); // Verifica que el parámetro está siendo recibido
+      const TraerTodosid = await Entradas.findAll({
+        where: {
+          Titulos: Titulos
         }
-    /* console.log(TraerTodos); */
- 
-    
+      });
+  
+      if (TraerTodosid.length > 0) {
+        res.status(200).json(TraerTodosid);
+      } else {
+        res.status(200).json({ message: "No hay comentarios con ese Titulo" });
+      }
+  
     } catch (error) {
-        console.log(error, "Error al traer todas las publicaciones")
+      console.log(error, "Error al traer todas las publicaciones");
+      res.status(500).json({ message: "Error al traer las publicaciones" });
     }
-    }
+  };
